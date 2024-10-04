@@ -29,13 +29,30 @@ const Sidebar: React.FC<Props> = ({ actual, onChange, open }: Props) => {
     {
       title: 'Solana',
       icon: '/coins/solana.png',
-      disabled: true
+      url: '/solana'
     }
   ])
   const [pages, setPages] = useState([
     {
-      title: 'Pano Ranking',
-      icon: 'account/trend.png',
+      title: 'Dashboard',
+      icon: 'account/dash.png',
+      url: '/home'
+    },
+    {
+      title: 'Portfolio',
+      icon: 'account/portfolio.png',
+      disabled: true,
+      url: '/home'
+    },
+    {
+      title: 'Market',
+      icon: 'account/market.png',
+      disabled: true,
+      url: '/home'
+    },
+    {
+      title: 'Transfers',
+      icon: 'account/transfers.png',
       disabled: true,
       url: '/home'
     },
@@ -45,8 +62,8 @@ const Sidebar: React.FC<Props> = ({ actual, onChange, open }: Props) => {
       url: '/home'
     },
     {
-      title: 'Profile',
-      icon: 'account/profile.png',
+      title: 'Pano Ranking',
+      icon: 'account/pano.png',
       disabled: true,
       url: '/home'
     },
@@ -60,6 +77,13 @@ const Sidebar: React.FC<Props> = ({ actual, onChange, open }: Props) => {
   const handleClick = (type: string, value: string) => {
     if (type === 'coin') {
       onChange(value)
+
+      if (value == 'Bitcoin') {
+        navigate(`/home`)
+      }
+      else {
+        navigate(`/${value.toLowerCase()}`)
+      }
     }
     else {
       open(value)
@@ -75,7 +99,7 @@ const Sidebar: React.FC<Props> = ({ actual, onChange, open }: Props) => {
       <div className={styles.body}>
         <MenuItems active={actual} items={coins} action={(value) => { handleClick("coin", value) }} />
 
-        <MenuItems title="ACCOUNT PAGES" items={pages} action={(value) => { handleClick("page", value) }} />
+        <MenuItems title="User Panel" items={pages} action={(value) => { handleClick("page", value) }} />
       </div>
     </div>
   )
